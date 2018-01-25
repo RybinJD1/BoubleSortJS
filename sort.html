@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>BubbleSort</title>
+    <meta http-equiv="Content-Type" content="text/html; Charset=UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="container text-center">
+            <span>Введите значения массива через запятую</span>
+            <div class="input-group">
+                <input type="text" class="form-control" id="input"/>
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" id="calculate">Сортировать</button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="container text-center">
+            <div id="bubbleSort"></div>
+            <div id="count"></div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function(){
+        var count = 0;
+        $('#calculate').click(function(){
+            let data = $('#input').val();
+            let array = data.split(',').map(item=> parseInt(item)).filter(x=>x);
+            if(array.length<1) {
+                alert("Введите данные");
+            }
+            bubbleSort(array)
+            $('#bubbleSort').text("Результат: "+array);
+            $('#count').text("Количество шагов: "+count);
+            count = 0;
+        });
+
+        function bubbleSort(array)
+        {
+            var n = array.length;
+            for (var i = 0; i < n-1; i++) {
+                for (var j = 0; j < n-1-i; j++) {
+                    if (array[j+1] < array[j]) {
+                        var t = array[j+1];
+                        array[j+1] = array[j];
+                        array[j] = t;
+                        count = count+1;
+                    }
+                }
+            }
+            return array;
+        }
+    });
+</script>
+</body>
+</html>
